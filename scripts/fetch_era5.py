@@ -1,4 +1,4 @@
-"""Pull the ERA5 monthly fields planned in research/ERA5_SETUP.md.
+"""Pull the ERA5 monthly fields used by the solution (setup steps: docs/SETUP.md).
 
 Ruling #34403 permits external non-TWS covariates provided every source date is at or before
 `t` for the row using it. That constraint is NOT enforced here -- this script only fetches

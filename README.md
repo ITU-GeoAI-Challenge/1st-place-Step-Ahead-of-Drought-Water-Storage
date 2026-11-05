@@ -16,6 +16,7 @@ networks over the global TWS field.
 
 ## Documents
 
+- Setup and run guide, step by step: [`docs/SETUP.md`](docs/SETUP.md)
 - Full solution documentation: [`submission_model/README.md`](submission_model/README.md)
 - Trustworthiness report: [`report/PHASE2_REPORT.md`](report/PHASE2_REPORT.md)
 - Technical report, including negative results: [`report/REPORT.md`](report/REPORT.md)
