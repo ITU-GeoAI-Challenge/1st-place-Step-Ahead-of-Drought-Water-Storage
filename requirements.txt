@@ -1,0 +1,19 @@
+# Python 3.12.3. Versions are the ones that rebuilt the base members byte for byte.
+# PyTorch with CUDA 13.2 comes from the PyTorch index:
+#   pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu132
+numpy==2.5.2
+pandas==3.0.5
+scipy==1.18.1
+scikit-learn==1.9.0
+lightgbm==4.7.0
+torch==2.14.0+cu132
+xarray==2026.7.0
+netCDF4==1.7.4          # engine xarray uses to read the ERA5 files
+codecarbon==3.3.0       # energy and emissions tracking
+
+# Only for downloading ERA5 again (scripts/fetch_era5.py). Needs a free CDS account.
+cdsapi==0.7.7
+
+# Only for the report figures (scripts/report_artifacts.py)
+shap==0.52.0
+matplotlib==3.11.1

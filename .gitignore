@@ -1,0 +1,16 @@
+# Competition data and anything derived from it
+data/
+submission/
+staging/
+submission_model/members/*.csv
+submission_model/output/
+*.npz
+*.npy
+*.parquet
+*.pt
+
+# Environment
+.venv/
+__pycache__/
+*.pyc
+catboost_info/

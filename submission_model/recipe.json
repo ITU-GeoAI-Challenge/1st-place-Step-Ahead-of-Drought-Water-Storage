@@ -1,0 +1,140 @@
+{
+ "description": "Replay of the final submission 8AUSjdXW (public 0.662143042, private 0.700298968).",
+ "base_members": [
+  "anchor_patch",
+  "climatology",
+  "covonly_big",
+  "dart",
+  "eof",
+  "era5_v5",
+  "fieldcnn",
+  "fielddirect3",
+  "final_v4",
+  "lineartree",
+  "mlpbag",
+  "mlpbag8",
+  "nb_persist",
+  "probe_persist",
+  "recursive"
+ ],
+ "steps": [
+  {
+   "target": "blend_dart",
+   "op": "script",
+   "script": "submission_model/replay_chain.py",
+   "note": "Replays delta108, lbstack_clim4, lbridge, lbstack6, lb2cov, blend_mlpbag, blend_mlpbag8, blend_opt, blend7, blend_receof, blend_opt2 and blend_dart with the original arithmetic, byte for byte."
+  },
+  {
+   "target": "blend_dopt",
+   "op": "linear",
+   "members": [
+    "blend_dart",
+    "dart"
+   ],
+   "weights": [
+    1.2972161537339424,
+    -0.32545843571094046
+   ]
+  },
+  {
+   "target": "blend_lt",
+   "op": "linear",
+   "members": [
+    "blend_dopt",
+    "lineartree"
+   ],
+   "weights": [
+    0.8627308329087228,
+    0.14658317137086596
+   ]
+  },
+  {
+   "target": "blend_d2",
+   "op": "linear",
+   "members": [
+    "blend_lt",
+    "dart"
+   ],
+   "weights": [
+    1.144671707219269,
+    -0.15980045574924004
+   ]
+  },
+  {
+   "target": "blend_d2_fx",
+   "op": "patch",
+   "members": [
+    "blend_d2"
+   ],
+   "scale": 0.9768,
+   "round5": true,
+   "values": "anchor_patch",
+   "note": "scripts/fix_anchor.py re-anchors 980 rows. LightGBM training is not bit-stable across runs on a loaded machine (28 rows differ by up to 0.0067), so the archived patch values in members/anchor_patch.csv are applied when present; otherwise the script is run."
+  },
+  {
+   "target": "blend_cnn",
+   "op": "solve2",
+   "members": [
+    "blend_d2_fx",
+    "fieldcnn"
+   ],
+   "round5": true,
+   "scored_weights": [0.6044721864338963, 0.39552781356610367],
+   "h": {
+    "kind": "fixed_a_probe_b",
+    "h_a": 0.582471,
+    "w": 0.04,
+    "lb_probe": 0.666964244
+   }
+  },
+  {
+   "target": "fielddirect3_s",
+   "op": "scale",
+   "members": [
+    "blend_cnn",
+    "fielddirect3"
+   ],
+   "round5": true
+  },
+  {
+   "target": "blend_d3",
+   "op": "solve2",
+   "members": [
+    "blend_cnn",
+    "fielddirect3_s"
+   ],
+   "round5": true,
+   "scored_weights": [1.0865805526144985, -0.08658055261449857],
+   "h": {
+    "kind": "score_a_probe_b",
+    "lb_a": 0.663901033,
+    "w": 0.04,
+    "lb_probe": 0.664833885
+   }
+  },
+  {
+   "target": "blend_nb",
+   "op": "solve2",
+   "members": [
+    "blend_d3",
+    "nb_persist"
+   ],
+   "round5": true,
+   "scored_weights": [0.951048084261357, 0.04895191573864296],
+   "h": {
+    "kind": "scores",
+    "lb_a": 0.663021385,
+    "lb_b": 0.825883741
+   }
+  },
+  {
+   "target": "final_dart",
+   "op": "final",
+   "members": [
+    "blend_nb",
+    "blend_dart"
+   ],
+   "w": -0.1824
+  }
+ ]
+}

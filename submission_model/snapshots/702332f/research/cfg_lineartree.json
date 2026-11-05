@@ -1,0 +1,16 @@
+{
+ "params": {
+  "linear_tree": true,
+  "num_leaves": 63
+ },
+ "features": "all",
+ "radius_km": 500.0,
+ "target": "delta",
+ "recalibrate": false,
+ "path_features": true,
+ "path_neighbourhood": true,
+ "smooth_pred": 0.5,
+ "era5": true,
+ "era5_path": true,
+ "era5_anom": true
+}

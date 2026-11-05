@@ -1,0 +1,10 @@
+{
+  "params": {},
+  "features": "all",
+  "radius_km": 500.0,
+  "target": "delta",
+  "recalibrate": false,
+  "path_features": true,
+  "path_neighbourhood": true,
+  "nearest_lags": true
+}

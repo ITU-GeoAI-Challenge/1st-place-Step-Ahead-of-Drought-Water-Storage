@@ -1,0 +1,36 @@
+{
+ "params": {
+  "learning_rate": 0.03
+ },
+ "features": {
+  "drop": [
+   "anchor_tws",
+   "delta_1m",
+   "delta_2m",
+   "delta_3m",
+   "delta_6m",
+   "delta_12m",
+   "cell_mean",
+   "cell_std",
+   "cell_trend",
+   "clim_target",
+   "clim_anchor",
+   "anom_anchor",
+   "clim_step",
+   "nb_tws",
+   "nb_anom",
+   "local_dev",
+   "anom_over_std"
+  ]
+ },
+ "radius_km": 500.0,
+ "target": "raw",
+ "recalibrate": false,
+ "path_features": true,
+ "path_neighbourhood": true,
+ "smooth_pred": 0.5,
+ "era5": true,
+ "era5_path": true,
+ "era5_anom": true,
+ "n_estimators": 900
+}
